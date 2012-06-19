@@ -112,7 +112,7 @@ module Squixtures
          end
          url << "@"
          if settings.include?("host")
-            url << "@#{settings['host']}"
+            url << "#{settings['host']}"
             url << ":#{settings['port']}" if settings.include?("port")
          end
          url << "/#{settings['database']}" if settings.include?("database")

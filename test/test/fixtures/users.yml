@@ -1,0 +1,6 @@
+one:
+   id: 1
+   email: jsmith@blah.com
+   passwd: password
+   status: 1
+   created: <%= Time.now %>

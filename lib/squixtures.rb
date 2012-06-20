@@ -3,11 +3,15 @@
 
 require "logjam"
 require "sequel"
+require "stringio"
 require "squixtures/version"
 require "squixtures/exceptions"
 require "squixtures/fixture"
 require "squixtures/fixtures"
 require "squixtures/loader"
+require "squixtures/postgres_helper"
+require "squixtures/sqlite3_helper"
+require "squixtures/helper_factory"
 
 module Squixtures
    # Definition of the default fixtures directory.
@@ -20,6 +24,10 @@ module Squixtures
    DEFAULT_CFG_SEARCH_PATHS            = ["#{Dir.getwd}/config",
                                           "#{Dir.getwd}/test/fixtures",
                                           Dir.getwd]
+
+   # Definition of the fixtures search paths.
+   FIXTURES_SEARCH_PATHS               = ["#{Dir.getwd}/test/fixtures",
+                                          "#{Dir.getwd}/fixtures"]
 
    # Definition of the configuration defaults.
    CONFIGURATION_DEFAULTS              = {:clear_tables  => true,
@@ -102,6 +110,39 @@ module Squixtures
 
       if !success
          raise SquixtureError.new("Unable to locate a database configuration file.")
+      end
+   end
+
+   # This method searches for a directory containing fixtures files, returning
+   # a string with a path to the directory if it's found or nil if it isn't.
+   def self.find_fixtures_dir
+      FIXTURES_SEARCH_PATHS.find do |entry|
+         found = false
+         if File.exist?(entry)
+            found = Dir.glob("#{entry}/*.yml").size > 0
+         end
+         found
+      end
+   end
+
+   # This method provides a means of converting a typical set of database
+   # connection settings, such as those in a Rails database.yml file, into
+   # the URL to be used to connect to the database using the Sequel library.
+   #
+   # ==== Parameters
+   # settings::  A Hash of the settings that will be used to generate the
+   #             connection URL.
+   def self.get_connection_url(settings)
+      adapter = settings['adapter']
+      case adapter
+         when 'postgresql'
+            Squixtures::PostgresHelper.get_connection_url(settings)
+
+         when 'sqlite3'
+            Squixtures::SQLite3Helper.get_connection_url(settings)
+
+         else
+            raise "Unrecognised database adapter '#{adapter}' encountered."
       end
    end
 end

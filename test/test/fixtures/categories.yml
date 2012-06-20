@@ -1,0 +1,20 @@
+one:
+   id: 1
+   name: Jackets
+   created: <%= Time.now %>
+
+two:
+   id: 2
+   name: Footwear
+   created: <%= Time.now - 5400 %>
+   updated: <%= Time.now %>
+
+three:
+   id: 3
+   name: Shirts
+   created: <%= Time.now %>
+
+four:
+   id: 4
+   name: Sweaters
+   created: <%= Time.now %>

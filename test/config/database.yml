@@ -1,5 +1,17 @@
+# SQLite3 configuration.
 test:
    adapter: sqlite3
-   database: db/squixtures_test
+   database: db/squixtures.db
    pool: 5
    timeout: 5000
+
+# Postgres configuration.
+# test:
+#   adapter: postgresql
+#   database: squixtures
+#   username: postgres
+#   password:
+#   port: 5432  
+#   host: localhost
+#   pool: 5
+#   timeout: 5000

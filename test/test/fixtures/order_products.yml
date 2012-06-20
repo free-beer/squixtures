@@ -1,0 +1,34 @@
+one:
+   id: 1
+   order_id: 1
+   product_id: 1
+   quantity: 1
+   created: <%= Time.now %>
+
+two:
+   id: 2
+   order_id: 1
+   product_id: 2
+   quantity: 1
+   created: <%= Time.now %>
+
+three:
+   id: 3
+   order_id: 2
+   product_id: 3
+   quantity: 3
+   created: <%= Time.now %>
+
+four:
+   id: 4
+   order_id: 3
+   product_id: 4
+   quantity: 2
+   created: <%= Time.now %>
+
+five:
+   id: 5
+   order_id: 3
+   product_id: 1
+   quantity: 1
+   created: <%= Time.now %>

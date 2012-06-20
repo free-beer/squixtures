@@ -38,7 +38,7 @@ module Squixtures
          begin
             Fixture.log.debug "Loading the data for the #{@name} fixture from #{fixture_path}."
             content = File.open(fixture_path, "r") {|file| file.readlines.join("")}
-            Fixture.log.debug "Read:\n#{content}"
+            #Fixture.log.debug "Read:\n#{content}"
             entries = YAML.load(ERB.new(content).result)
             if entries && entries.size > 0
                data_set = connection[@name.intern]

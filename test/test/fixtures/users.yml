@@ -4,3 +4,16 @@ one:
    passwd: password
    status: 1
    created: <%= Time.now %>
+two:
+   id: 2
+   email: joe.bloggs@lalala.org
+   passwd: blurgh
+   status: 1
+   created: <%= Time.now %>
+three:
+   id: 3
+   email: a.stanton@good.bad.ugly.com
+   passwd: heyhey!
+   status: -1
+   created: <%= Time.now - 36000 %>
+   updated: <%= Time.now %>

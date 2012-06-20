@@ -1,0 +1,27 @@
+one:
+   id: 1
+   category_id: 1
+   name: Waterwear Jacket
+   cost: 112.75
+   created: <%= Time.now %>
+
+two:
+   id: 2
+   category_id: 2
+   name: Hiking Boots
+   cost: 89.99
+   created: <%= Time.now %>
+
+three:
+   id: 3
+   category_id: 3
+   name: Lumberjack Shirt
+   cost: 31.75
+   created: <%= Time.now %>
+
+four:
+   id: 4
+   category_id: 2
+   name: Running Shoes
+   cost: 63.50
+   created: <%= Time.now %>

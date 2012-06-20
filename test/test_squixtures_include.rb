@@ -4,6 +4,11 @@ require 'test/unit'
 require 'stringio'
 require 'yaml'
 
+LogJam.configure({:loggers => [{:default => true,
+                                :file    => "sqixtures.log",
+                                :level   => "DEBUG",
+                                :name    => "main"}]})
+
 class TestSquixturesInclude < Test::Unit::TestCase
    include Squixtures::Fixtures
 

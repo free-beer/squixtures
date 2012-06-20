@@ -106,6 +106,15 @@ the SQLite3 and Postgres databases. Adding support for additional databases
 would require that the library be extended to accommodate the specified database
 in the areas detailed above.
 
+The approach currently taken to this issue is to provide a database specific
+helper class. These helper classes provide three basic pieces of functionality.
+First they provide a class level function that takes a Hash of database
+connection configuration parameters and generates a connection URL from them.
+Second they provide before and after load functionality that is currently
+intended to be the location where referential integrity is deactivate on the
+appropriate table prior to the data load. There are currently two such classes
+defined in the library - PostgresHelper and SQLite3Helper.
+
 ## Contributing
 
 1. Fork it

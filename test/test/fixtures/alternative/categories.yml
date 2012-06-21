@@ -1,0 +1,10 @@
+one:
+   id: 1
+   name: Jackets
+   created: <%= Time.now %>
+
+two:
+   id: 1
+   name: Footwear
+   created: <%= Time.now - 5400 %>
+   updated: <%= Time.now %>

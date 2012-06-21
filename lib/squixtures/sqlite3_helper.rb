@@ -31,6 +31,12 @@ module Squixtures
          connection.run("PRAGMA foreign_keys = ON")
       end
 
+      # This method is an instance level version of the get_connection_url
+      # method declared at the class level.
+      def get_connection_url(settings)
+         SQLite3Helper.get_connection_url(settings)
+      end
+
       # This method converts a typical set of database connection settings, such
       # as those in a Rails database.yml file, into the URL to be used to connect
       # to a Postgres database using the Sequel library.

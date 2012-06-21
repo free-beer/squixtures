@@ -64,12 +64,18 @@ module Squixtures
       # will load it's data from. This will be nil if a file cannot be located
       # for the fixture.
       def file_path
-         path = nil
-         @configuration[:search_paths].find do |entry|
-             full_path = "#{entry}/#{@name}.yml"
-             Fixture.log.debug "Checking for the existence of #{full_path}."
-             path = full_path if File.exist?(full_path)
-             !path.nil?
+         path      = nil
+         full_path = "#{@configuration[:fixtures_dir]}/#{@name}.yml"
+         Fixture.log.debug "Checking for the existence of #{full_path}."
+         if !File.exist?(full_path)
+            @configuration[:search_paths].find do |entry|
+                full_path = "#{entry}/#{@name}.yml"
+                Fixture.log.debug "Checking for the existence of #{full_path}."
+                path = full_path if File.exist?(full_path)
+                !path.nil?
+            end
+         else
+            path = full_path
          end
          path.nil? ? path : File.expand_path(path)
       end

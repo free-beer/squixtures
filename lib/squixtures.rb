@@ -80,6 +80,36 @@ module Squixtures
       @@configuration[:environment]
    end
 
+   # This method provides a means of fetching the path to the directory that
+   # is expected to contain the fixtures files.
+   def self.fixtures_dir
+      @@configuration[:fixtures_dir].nil? ? Squixtures.find_fixtures_dir : @@configuration[:fixtures_dir]
+   end
+
+   # This method allows for the specification of the directory that contains
+   # the fixture files.
+   #
+   # ==== Parameters
+   # path::  The path of the fixtures directory.
+   def self.fixtures_dir=(path)
+      @@configuration[:fixtures_dir] = path
+   end
+
+   # This method provides a means of checking whether transactional fixtures
+   # have been activated in the library.
+   def self.transactional?
+      @@configuration[:transactional]
+   end
+
+   # This method allows the toggling of transactional fixture loading.
+   #
+   # ==== Parameters
+   # setting::  A boolean value indicating whether transactional loading should
+   #            be used with the fixtures.
+   def self.transactional=(setting)
+      @@configuration[:transactional] = setting
+   end
+
    # This method loads the database configuration details into the current
    # Squixtures configuration.
    def self.load_database_configuration
@@ -116,10 +146,12 @@ module Squixtures
    # This method searches for a directory containing fixtures files, returning
    # a string with a path to the directory if it's found or nil if it isn't.
    def self.find_fixtures_dir
+      return @@configuration[:fixtures_dir] if !@@configuration[:fixtures_dir].nil?
       FIXTURES_SEARCH_PATHS.find do |entry|
          found = false
          if File.exist?(entry)
             found = Dir.glob("#{entry}/*.yml").size > 0
+            @@configuration[:fixtures_dir] = entry if found
          end
          found
       end
@@ -133,16 +165,6 @@ module Squixtures
    # settings::  A Hash of the settings that will be used to generate the
    #             connection URL.
    def self.get_connection_url(settings)
-      adapter = settings['adapter']
-      case adapter
-         when 'postgresql'
-            Squixtures::PostgresHelper.get_connection_url(settings)
-
-         when 'sqlite3'
-            Squixtures::SQLite3Helper.get_connection_url(settings)
-
-         else
-            raise "Unrecognised database adapter '#{adapter}' encountered."
-      end
+      HelperFactory.create_helper(settings).get_connection_url(settings)
    end
 end

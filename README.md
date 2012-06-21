@@ -82,6 +82,30 @@ possible to include simple Ruby statements into the definitions. In the
 example above Ruby code is used to generate values for the created_at
 and updated_at field values.
 
+## Advanced Usage
+The Squixtures library makes a set of assumptions to attempt to ease the
+process of using fixtures. For example, the library assumes that a database.yml
+file can be found and that fixtures will be loaded into the test database
+specified in the database configuration. This is convenient but facilities
+have also been provided to work around these assumptions.
+
+To change the database configuration entry that the library will use you can
+change the environment setting for Squixtures by executing a line like the
+following before performing any fixtures loads...
+
+   Squixtures.environment = "development"
+
+If you want to alter the location that the Squixtures library obtains fixture
+files from you can do so with a line such as the following...
+
+   Squixtures.fixtures_dir = "/my/fixtures/directory"
+
+By default Squixtures does not make use of transactions when loading fixtures.
+You can specifying the use of transactions on a per fixture basis with a line
+such as the following...
+
+   Squixtures.transactional = true
+
 ## Platform Independence
 The Sequel library has been used in minimize the amount of RDBMS specific code
 exists in the library. Unfortunately, it's impossible to be complete free of

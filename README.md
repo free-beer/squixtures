@@ -1,7 +1,7 @@
 # Squixtures
 
 Squixtures is a library that provides a simple data fixtures facility, ala
-the fixtures generally used in unit tests. The library came abut because it
+the fixtures generally used in unit tests. The library came about because it
 is quite difficult to make use of Rails fixtures outside of the Rails
 framework itself.
 

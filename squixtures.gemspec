@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["ruby@blacknorth.com"]
   gem.description   = %q{Squixtures is a library that provides a data fixtures facility ala the fixtures typically used in unit tests. The library makes use of the Sequel library to provide a degree of database independence (needs more work) and use the LogJam library to unify logging output.}
   gem.summary       = %q{Simple fixtures functionality.}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/free-beer/squixtures"
 
   gem.add_dependency('sequel', '>= 3.36.1')
   gem.add_dependency('logjam', '>= 0.0.3')

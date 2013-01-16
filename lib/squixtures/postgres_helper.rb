@@ -19,7 +19,11 @@ module Squixtures
       def before_load(fixtures, connection)
          PostgresHelper.log.debug "PostgresHelper.before_load called."
          fixtures.each do |fixture|
-            connection.run("alter table #{fixture.table_name} disable trigger all")
+           begin
+             connection.run("alter table #{fixture.table_name} disable trigger all")
+           rescue
+             connection.run("alter table #{fixture.table_name} disable trigger user")
+           end
          end
       end
 
@@ -33,7 +37,11 @@ module Squixtures
       def after_load(fixtures, connection)
          PostgresHelper.log.debug "PostgresHelper.after_load called."
          fixtures.each do |fixture|
-            connection.run("alter table #{fixture.table_name} enable trigger all")
+           begin
+             connection.run("alter table #{fixture.table_name} enable trigger all")
+           rescue
+             connection.run("alter table #{fixture.table_name} enable trigger user")
+           end
          end
       end
 

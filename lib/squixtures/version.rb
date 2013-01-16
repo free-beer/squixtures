@@ -2,5 +2,5 @@
 # Copyright (c), 2012 Peter Wood
 
 module Squixtures
-   VERSION = "0.0.1"
+   VERSION = "0.0.2"
 end

@@ -13,7 +13,7 @@ module Squixtures
          adapter = settings['adapter']
          helper  = nil
          case adapter
-            when 'postgresql'
+            when 'postgresql', 'postgres'
                helper = PostgresHelper.new
 
             when 'sqlite3'
@@ -21,7 +21,7 @@ module Squixtures
          end
 
          if helper.nil?
-            raise SquixturesError.new("Unrecognised database adapter '#{adapter}' encountered.")
+            raise SquixtureError.new("Unrecognised database adapter '#{adapter}' encountered.")
          end
          helper
       end
